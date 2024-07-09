@@ -1,66 +1,42 @@
-
 import random
-questions=[
-[
-    'When did Pakistan Resolution was passed?','1947','1921','1940','1975',3
-    ],
-[
-    "Who wrote the national anthem of Pakistan?","Hafeez Jalandhari",
-    "Rehmat Ali","Moulana M. ALi Johar","Ahmed Faraz",1
-    ],
-[
-    "Pakistan national game?","Cricket","Hockey","Football","Badminton",2
-    ],
-[
-    "Quaid-e-Azam date of birth?","25/12/1876","4/3/2000","1/2/1940","24/1/1975",1
-    ],
-[
-    "Who is the current captain of Pakistan Cricket Team?","Babar Azam","M.Rizwan","Kamran Akmal","Waqar Younis",1
-    ],
-[
-    "Capital of Punjab?","Multan","Rawalpindi","Lahore","Faislabad",3
-    ],
-[
-    "Capital of KPK","Swat","Mardan","Peshawar","Swabi",3
-    ],
-[
-    "National language of Pakistan?","Urdu","Punjabi","Siriaki","English",1
-    ],
-[
-    "National animal of Pakistan ?","Markhor","Panda","Zebra","Lion",1
-    ],
-[
-    "Pakistan first Governor General?","Imran Khan","M.Ali Jinnah","Allama Iqbal","Khawaja Nazimuddin",2
-    ]
+
+questions = [
+    ['When was the Pakistan Resolution passed?', '1947', '1921', '1940', '1975', 3],
+    ['Who wrote the national anthem of Pakistan?', 'Hafeez Jalandhari', 'Rehmat Ali', 'Moulana M. Ali Johar', 'Ahmed Faraz', 1],
+    ['What is the national game of Pakistan?', 'Cricket', 'Hockey', 'Football', 'Badminton', 2],
+    ['What is Quaid-e-Azam\'s date of birth?', '25/12/1876', '4/3/2000', '1/2/1940', '24/1/1975', 1],
+    ['Who is the current captain of the Pakistan Cricket Team?', 'Babar Azam', 'M. Rizwan', 'Kamran Akmal', 'Waqar Younis', 1],
+    ['What is the capital of Punjab?', 'Multan', 'Rawalpindi', 'Lahore', 'Faisalabad', 3],
+    ['What is the capital of KPK?', 'Swat', 'Mardan', 'Peshawar', 'Swabi', 3],
+    ['What is the national language of Pakistan?', 'Urdu', 'Punjabi', 'Siraiki', 'English', 1],
+    ['What is the national animal of Pakistan?', 'Markhor', 'Panda', 'Zebra', 'Lion', 1],
+    ['Who was the first Governor General of Pakistan?', 'Imran Khan', 'M. Ali Jinnah', 'Allama Iqbal', 'Khawaja Nazimuddin', 2]
 ]
-questions=random.sample(questions,9)
-levels=[10000,20000,40000,60000,100000,500000,1000000,2000000,3200000,5000000]
-for i in range(0,len(questions)):
-    question=questions
-    print(f"Question for Rs.{levels[i]}:")
-    print(f"{question[i][0]}:")
-    print(f"1. {question[i][1]} \t\t 2.{question[i][2]}")
-    print(f"3. {question[i][3]} \t\t 4.{question[i][4]}")
 
-    reply=int(input("Choose option(1-4) or 0 to quit:",))
+# Shuffle the questions and select 9
+questions = random.sample(questions, 9)
+
+levels = [10000, 20000, 40000, 60000, 100000, 500000, 1000000, 2000000, 3200000, 5000000]
+
+for i in range(len(questions)):
+    print(f"Question for Rs. {levels[i]}:")
+    print(f"{questions[i][0]}")
+    print(f"1. {questions[i][1]} \t\t 2. {questions[i][2]}")
+    print(f"3. {questions[i][3]} \t\t 4. {questions[i][4]}")
     
-    if (reply == questions[i][5]):
-        print(f"Correct answer you have won Rs.{levels[i]}")
-        if( i==3 ):
-         print(f"You have won Rs. {levels[i][3]}")
-        elif( i==7 ):
-          print(f"You have won Rs. {levels[i][7]}")
-        elif( i==9 ):
-          print(f"You have won Rs. {levels[i][9]}")
-                     
-    elif (reply == 0):
-        print("You have exit the game.\n Better luck next time")
-        money=levels[i-1]
+    reply = int(input("Choose option (1-4) or 0 to quit: "))
+
+    if reply == 0:
+        if i == 0:
+            money = 0
+        else:
+            money = levels[i-1]
+        print(f"You have exited the game. You won Rs. {money}. Better luck next time!")
         break
+    elif reply == questions[i][5]:
+        print(f"Correct answer! You have won Rs. {levels[i]}")
+        if i == len(questions) - 1:
+            print(f"Congratulations! You have won the grand prize of Rs. {levels[i]}!")
     else:
-          ans=print("Wrong Answer.")
-          break
-    
-    
-
-  
+        print(f"Wrong answer. You won Rs. {levels[i-1] if i > 0 else 0}. Better luck next time!")
+        break
